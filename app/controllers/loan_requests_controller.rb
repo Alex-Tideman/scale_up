@@ -2,7 +2,7 @@ class LoanRequestsController < ApplicationController
   before_action :set_loan_request, only: [:update, :show]
 
   def index
-    @loan_requests = LoanRequest.page(params[:page]).order('created_at DESC')
+    @loan_requests = LoanRequest.page(params[:loan_request_params]).order('created_at DESC')
   end
 
   def create
