@@ -59,7 +59,7 @@ module LoadScript
     end
 
     def browse_loan_requests
-      session.visit "#{host}/browse"
+      session.visit("#{host}/browse")
       session.all(".lr-about").sample.click
     end
 
