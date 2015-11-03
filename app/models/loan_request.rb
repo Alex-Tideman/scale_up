@@ -81,6 +81,7 @@ class LoanRequest < ActiveRecord::Base
   end
 
   def related_projects
-    LoanRequest.limit(4)
+    (categories.flat_map(&:loan_requests) - [self]).shuffle.take(4)
+    # LoanRequest.joins(:categories).where(categories.includes(self)).limit(4)
   end
 end
