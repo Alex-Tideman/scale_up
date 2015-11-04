@@ -12,8 +12,8 @@ module LoadScript
     attr_reader :host
     def initialize(host = nil)
       Capybara.default_driver = :poltergeist
-      @host = host || "https://localhost:3000"
-      # @host = host || "https://vast-shore-6088.herokuapp.com/"
+      # @host = host || "https://localhost:3000"
+      @host = host || "https://vast-shore-6088.herokuapp.com/"
     end
 
     def logger
