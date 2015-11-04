@@ -82,7 +82,7 @@ class LoanRequest < ActiveRecord::Base
 
   def related_projects
     Rails.cache.fetch("loan_request_related_projects") do
-      (categories.flat_map(&:loan_requests) - [self]).shuffle.take(4)
+      LoanRequest.joins(:categories).where(['categories.id = ?', categories.map(&:id)]).sample(4)
     end
   end
 end
