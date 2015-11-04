@@ -138,6 +138,13 @@ module LoadScript
 
     end
 
+    def lender_lends
+      sign_up_as_lender
+      session.visit("#{host}/browse")
+      session.all(".lr-about").sample.click
+
+    end
+
     def categories
       ["Agriculture", "Education", "Community"]
     end
