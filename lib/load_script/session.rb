@@ -12,6 +12,7 @@ module LoadScript
     attr_reader :host
     def initialize(host = nil)
       Capybara.default_driver = :poltergeist
+      # @host = host || "http://localhost:3000/"
       @host = host || "https://vast-shore-6088.herokuapp.com/"
     end
 
@@ -128,8 +129,8 @@ module LoadScript
         session.fill_in("Image url", with: "")
         session.fill_in("Requested by date", with: "10/10/2015")
         session.fill_in("Repayment begin date", with: "12/10/2015")
-        session.select("Repayment rate", with: "Monthly")
-        session.select("Category", with: "Community")
+        session.select("Monthly", from: "Repayment rate")
+        session.select("Education", from: "Category")
         session.fill_in("Amount", with: "100")
 
         session.click_link_or_button "Submit"
