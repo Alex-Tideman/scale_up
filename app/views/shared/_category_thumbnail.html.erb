@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <% @categories.each do |category| %>
+        <div class="col-sm-6 col-md-4 col-lg-4 loan-request">
+            <div class="caption">
+              <div class="thumbnail-label">
+                <h3><%= truncate(category.title, length: 20) %></h3>
+              </div>
+              <p><%= truncate(category.description, length: 30) %></p>
+              <p>
+                <%= link_to "View All Loans", category_path(category), class: "btn btn-default lr-about" %>
+              </p>
+              <br>
+            </div>
+          </div>
+    <% end %>
+  </div>
+</div>
