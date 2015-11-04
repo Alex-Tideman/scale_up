@@ -12,7 +12,8 @@ module LoadScript
     attr_reader :host
     def initialize(host = nil)
       Capybara.default_driver = :poltergeist
-      @host = host || "http://localhost:3000"
+      @host = host || "https://localhost:3000"
+      # @host = host || "https://vast-shore-6088.herokuapp.com/"
     end
 
     def logger
@@ -46,16 +47,18 @@ module LoadScript
     end
 
     def actions
-      [:browse_loan_requests, :sign_up_as_lender]
+      [:browse_loan_requests, :sign_up_as_lender, :sign_up_as_borrower,
+       :user_browses_categories,:user_browses_loan_request_from_category,
+       :borrower_creates_loan_request]
     end
 
     def log_in(email="demo+horace@jumpstartlab.com", pw="password")
       log_out
       session.visit host
-      session.click_link("Log In")
-      session.fill_in("email_address", with: email)
-      session.fill_in("password", with: pw)
-      session.click_link_or_button("Login")
+      session.click_link("Login")
+      session.fill_in("session_email", with: email)
+      session.fill_in("session_password", with: pw)
+      session.click_link_or_button("Log In")
     end
 
     def browse_loan_requests
@@ -89,6 +92,50 @@ module LoadScript
         session.fill_in("user_password_confirmation", with: "password")
         session.click_link_or_button "Create Account"
       end
+    end
+
+    def sign_up_as_borrower(name = new_user_name)
+      log_out
+      session.find("#sign-up-dropdown").click
+      session.find("#sign-up-as-borrower").click
+      session.within("#borrowerSignUpModal") do
+        session.fill_in("user_name", with: name)
+        session.fill_in("user_email", with: new_user_email(name))
+        session.fill_in("user_password", with: "password")
+        session.fill_in("user_password_confirmation", with: "password")
+        session.click_link_or_button "Create Account"
+      end
+    end
+
+    def user_browses_categories
+      log_in
+      session.visit("#{host}/categories")
+      session.all(".lr-about").sample.click
+    end
+
+    def user_browses_loan_request_from_category
+      log_in
+      session.visit("#{host}/categories")
+      session.all(".lr-about").sample.click
+      session.all(".lr-about").sample.click
+    end
+
+    def borrower_creates_loan_request
+      sign_up_as_borrower
+      session.click_link_or_button "Create Loan Request"
+      session.within("#loanRequestModal") do
+        session.fill_in("Title", with: "Basketball Court")
+        session.fill_in("Description", with: "Court for the kids")
+        session.fill_in("Image url", with: "")
+        session.fill_in("Requested by date", with: "10/10/2015")
+        session.fill_in("Repayment begin date", with: "12/10/2015")
+        session.select("Repayment rate", with: "Monthly")
+        session.select("Category", with: "Community")
+        session.fill_in("Amount", with: "100")
+
+        session.click_link_or_button "Submit"
+      end
+
     end
 
     def categories

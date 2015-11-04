@@ -31,7 +31,8 @@
            <li role="active"><%= link_to "Portfolio", lender_path(current_user) %></li>
           <% end %>
         <% if current_user %>
-          <li role="active"><%= link_to "Log out", logout_path, method: :delete, id: "logout" %></li>
+            <li role="active"><%= link_to "Profile", borrower_path(current_user), id: "profile" %></li>
+            <li role="active"><%= link_to "Log out", logout_path, method: :delete, id: "logout" %></li>
         <% else %>
           <li class="active"><a href="#" data-toggle="modal" data-target="#loginModal"> Login <span class="sr-only">(current)</span></a></li>
         <% end %>

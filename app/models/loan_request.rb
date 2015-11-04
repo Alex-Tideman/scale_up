@@ -81,7 +81,7 @@ class LoanRequest < ActiveRecord::Base
   end
 
   def related_projects
-    Rails.cache.fetch("loan_request_related_projects") do
+    Rails.cache.fetch("loan_request_related_projects-#{categories.first}") do
       LoanRequest.joins(:categories).where(['categories.id = ?', categories.map(&:id)]).sample(4)
     end
   end
