@@ -29,5 +29,10 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
 
-  get "*path", to: "home#not_found"
+  %w( 404 422 500 ).each do |code|
+    get code, :to => "errors#show", :code => code
+  end
+
+  get "*path", to: "errors#show", :code => 404
+
 end

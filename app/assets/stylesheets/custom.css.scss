@@ -263,3 +263,18 @@ footer {
 .caption {
   text-align:center;
 }
+
+.error {
+  text-align:center;
+  color: #FFF;
+  background-color: #428BCA;
+  height:100%;
+  padding:50px;
+}
+
+.error a,a:visited,a:link {
+  color:white;
+  :hover{
+    text-decoration: underline;
+  }
+}

@@ -15,4 +15,5 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :create_cart, :current_user, :current_borrower?
+
 end
