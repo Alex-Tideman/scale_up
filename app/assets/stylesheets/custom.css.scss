@@ -2,7 +2,6 @@ $primary-color: #fff;
 $hover-color: #fed136;
 $muted: #777;
 
-
 body {
   padding-top: 50px;
 }
@@ -272,7 +271,7 @@ footer {
   padding:50px;
 }
 
-.error a,a:visited,a:link {
+a,a:visited,a:link.error  {
   color:white;
   :hover{
     text-decoration: underline;
