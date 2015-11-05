@@ -49,7 +49,7 @@ module LoadScript
     def actions
       [:browse_loan_requests, :sign_up_as_lender, :sign_up_as_borrower,
        :user_browses_categories,:user_browses_loan_request_from_category,
-       :borrower_creates_loan_request]
+       :borrower_creates_loan_request,:lender_lends]
     end
 
     def log_in(email="demo+horace@jumpstartlab.com", pw="password")
