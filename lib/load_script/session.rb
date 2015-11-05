@@ -26,12 +26,7 @@ module LoadScript
 
     def run
       while true
-        begin
         run_action(actions.sample)
-        rescue
-          puts "Heroku Error"
-          retry while true
-        end
       end
     end
 
