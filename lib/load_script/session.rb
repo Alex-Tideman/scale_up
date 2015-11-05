@@ -49,7 +49,7 @@ module LoadScript
     def actions
       [:browse_loan_requests, :sign_up_as_lender, :sign_up_as_borrower,
        :user_browses_categories,:user_browses_loan_request_from_category,
-       :borrower_creates_loan_request,:lender_lends]
+       :borrower_creates_loan_request]
     end
 
     def log_in(email="demo+horace@jumpstartlab.com", pw="password")
@@ -122,7 +122,7 @@ module LoadScript
 
     def borrower_creates_loan_request
       sign_up_as_borrower
-      session.click_link_or_button "Create Loan Request"
+      session.click_link_or_button("Create Loan Request")
       session.within("#loanRequestModal") do
         session.fill_in("Title", with: "Basketball Court")
         session.fill_in("Description", with: "Court for the kids")
