@@ -269,11 +269,12 @@ footer {
   background-color: #428BCA;
   height:100%;
   padding:50px;
-}
-
-a,a:visited,a:link.error  {
-  color:white;
-  :hover{
-    text-decoration: underline;
+  a,a:visited,a:link  {
+    color:white;
+    :hover{
+      text-decoration: underline;
+    }
   }
 }
+
+
