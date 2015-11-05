@@ -12,8 +12,8 @@ module LoadScript
     attr_reader :host
     def initialize(host = nil)
       Capybara.default_driver = :poltergeist
-      # @host = host || "http://localhost:3000/"
-      @host = host || "https://vast-shore-6088.herokuapp.com/"
+      @host = host || "http://localhost:3000/"
+      # @host = host || "https://vast-shore-6088.herokuapp.com/"
     end
 
     def logger
@@ -48,8 +48,7 @@ module LoadScript
 
     def actions
       [:browse_loan_requests, :sign_up_as_lender, :sign_up_as_borrower,
-       :user_browses_categories,:user_browses_loan_request_from_category,
-       :borrower_creates_loan_request]
+       :user_browses_categories,:user_browses_loan_request_from_category]
     end
 
     def log_in(email="demo+horace@jumpstartlab.com", pw="password")
