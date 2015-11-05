@@ -12,8 +12,8 @@ module LoadScript
     attr_reader :host
     def initialize(host = nil)
       Capybara.default_driver = :poltergeist
-      # @host = host || "http://localhost:3000/"
-      @host = host || "https://vast-shore-6088.herokuapp.com/"
+      @host = host || "http://localhost:3000/"
+      # @host = host || "https://vast-shore-6088.herokuapp.com/"
     end
 
     def logger
@@ -26,7 +26,12 @@ module LoadScript
 
     def run
       while true
+        begin
         run_action(actions.sample)
+        rescue
+          puts "Heroku Error"
+          retry while true
+        end
       end
     end
 
