@@ -49,7 +49,7 @@ module LoadScript
     def actions
       [:browse_loan_requests, :sign_up_as_lender, :sign_up_as_borrower,
        :user_browses_categories,:user_browses_loan_request_from_category,
-       :borrower_creates_loan_request,:lender_lends]
+       :borrower_creates_loan_request,:lender_lends,:visit_404_page]
     end
 
     def log_in(email="demo+horace@jumpstartlab.com", pw="password")
@@ -139,15 +139,28 @@ module LoadScript
     end
 
     def lender_lends
-      sign_up_as_lender
+      begin
+        sign_up_as_lender
+        session.visit "#{host}/browse"
+        session.all(".lr-about").sample.click
+        session.find(".btn-contribute").click
+        session.visit "#{host}/cart"
+        session.find(".cart-button").click
+      rescue
+        retry while true
+      end
+    end
+
+    def visit_404_page
+      log_in
       session.visit("#{host}/browse")
-      session.all(".pull-right").sample.click
-      session.click_link("Basket")
-      session.click_on("Transfer Funds")
+      session.visit("#{host}/monkeys39202")
+      session.click_on("Home")
+
     end
 
     def categories
-      ["Agriculture", "Education", "Community"]
+      ["Agriculture", "Education", "Youth","Transportation"]
     end
   end
 end
